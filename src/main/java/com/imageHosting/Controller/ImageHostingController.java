@@ -4,10 +4,7 @@ import com.imageHosting.Service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -32,6 +29,9 @@ public class ImageHostingController {
 
         return new ResponseEntity<Map<String, String>>(response, HttpStatus.CREATED);
     }
+
+    @GetMapping("/images/abc-123")
+
 
     @PostMapping("/test")
     public String testing(){
