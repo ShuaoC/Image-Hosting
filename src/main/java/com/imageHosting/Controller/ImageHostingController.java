@@ -30,7 +30,7 @@ public class ImageHostingController {
 
         Map<String, String> response = new HashMap<>();
 
-        response.put("URL", url);
+        response.put("image", url);
 
         return new ResponseEntity<Map<String, String>>(response, HttpStatus.CREATED);
     }
