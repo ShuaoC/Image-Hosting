@@ -1,20 +1,18 @@
 package com.imageHosting.Service;
 
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.services.s3.model.*;
 import com.amazonaws.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import com.amazonaws.services.s3.model.ObjectMetadata;
 import org.springframework.web.server.ResponseStatusException;
-import software.amazon.awssdk.utils.IoUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -56,5 +54,33 @@ public class ClientService implements FileService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public List<String> listFiles() {
+
+        com.amazonaws.services.s3.model.ListObjectsRequest listObjectsRequest =
+                new com.amazonaws.services.s3.model.ListObjectsRequest()
+                        .withBucketName(bucketName);
+
+        List<String> keys = new ArrayList<>();
+
+        ObjectListing objects = amazonS3Client.listObjects(listObjectsRequest);
+
+        while (true) {
+            List<S3ObjectSummary> objectSummaries = objects.getObjectSummaries();
+            if (objectSummaries.size() < 1) {
+                break;
+            }
+
+            for (S3ObjectSummary item : objectSummaries) {
+                if (!item.getKey().endsWith("/"))
+                    keys.add(item.getKey());
+            }
+
+            objects = amazonS3Client.listNextBatchOfObjects(objects);
+        }
+
+        return keys;
     }
 }

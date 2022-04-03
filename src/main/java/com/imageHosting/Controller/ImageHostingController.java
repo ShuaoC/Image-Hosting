@@ -47,16 +47,10 @@ public class ImageHostingController {
                 .body(contents);
     }
 
-//    @GetMapping("/images")
-//    public List<String> listBuckets() {
-//        var listRequest = ListObjectsRequest.builder().bucket("my-pocket").build();
-//        var objects = this.fileService.listObjects(listRequest).contents();
-//        List<String> files = new ArrayList<>();
-//        for(S3Object obj: objects) {
-//            files.add(obj.key());
-//        }
-//        return files;
-//    }
+    @RequestMapping(value = "/images", method = RequestMethod.GET)
+    public ResponseEntity<List<String>> getListOfFiles() {
+        return new ResponseEntity<>(fileService.listFiles(), HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String testing(){
