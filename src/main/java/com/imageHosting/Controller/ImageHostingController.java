@@ -1,4 +1,4 @@
-package com.imageHosting;
+package com.imageHosting.Controller;
 
 import com.imageHosting.Service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,11 @@ public class ImageHostingController {
         response.put("URL", url);
 
         return new ResponseEntity<Map<String, String>>(response, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/test")
+    public String testing(){
+        return "Testing";
     }
 
 }
