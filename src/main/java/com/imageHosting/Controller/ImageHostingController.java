@@ -35,7 +35,7 @@ public class ImageHostingController {
         return new ResponseEntity<Map<String, String>>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("/images/{}")
+    @RequestMapping(value = "/images/{filename}", method = RequestMethod.GET)
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable String filename){
         byte[] file = fileService.downloadFile(filename);
         ByteArrayResource contents = new ByteArrayResource(file);
@@ -58,7 +58,7 @@ public class ImageHostingController {
 //        return files;
 //    }
 
-    @PostMapping("/test")
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String testing(){
         return "Testing";
     }

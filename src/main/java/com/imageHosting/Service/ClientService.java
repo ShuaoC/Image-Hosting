@@ -53,7 +53,8 @@ public class ClientService implements FileService {
             byte[] file = IOUtils.toByteArray(inputStream);
             return file;
         } catch (IOException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to download file");
+            e.printStackTrace();
         }
+        return null;
     }
 }
