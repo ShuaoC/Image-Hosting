@@ -1,4 +1,4 @@
-package com.imageHosting;
+package com.imageHosting.Service;
 
 import org.springframework.web.multipart.MultipartFile;
 
