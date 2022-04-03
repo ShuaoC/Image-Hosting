@@ -32,7 +32,7 @@ public class AWSS3Service implements FileService {
         objectMetadata.setContentType(multipartFile.getContentType());
 
         try{
-            amazonS3Client.putObject(bucketName, key, multipartFile.getInputStream(), objectMetadata)
+            amazonS3Client.putObject(bucketName, key, multipartFile.getInputStream(), objectMetadata);
         } catch (IOException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to upload file");
         }
