@@ -1,4 +1,4 @@
-# Image-Hosting-2
+# Image-Hosting
 
 Overview  
 Built a simple image-hosting API. You could imagine this as being one of the APIs behind a site like Instagram or Imgur. A user is able to call this API to store an image and then call the API again to retrieve the image. The images will be stored in S3.  
